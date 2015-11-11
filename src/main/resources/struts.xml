@@ -30,6 +30,7 @@
 	<package name="musee" namespace="/" extends="struts-default">
 
 
+
 		<!-- Two things to Notice: 1) class is set to 'editEmployeeAction' which 
 			is bean defined by Spring context 2) We have given the method to be called 
 			here as well; -->
@@ -54,9 +55,57 @@
 		<!-- <default-interceptor-ref name="authStack"></default-interceptor-ref> -->
 
 
-		<!-- <global-results> -->
-		<!-- <result name="login" type="redirect">/login.action</result> -->
-		<!-- </global-results> -->
+		<global-results>
+			<result name="error">/view/error.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+			<exception-mapping exception="java.lang.ArithmeticException"
+				result="error" />
+			<exception-mapping exception="java.lang.ArrayIndexOutOfBoundsException"
+				result="error" />
+			<exception-mapping exception="java.lang.ArrayStoreException"
+				result="error" />
+			<exception-mapping exception="java.lang.ClassCastException"
+				result="error" />
+			<exception-mapping exception="java.lang.IllegalArgumentException"
+				result="error" />
+			<exception-mapping exception="java.lang.IllegalMonitorStateException"
+				result="error" />
+			<exception-mapping exception="java.lang.IllegalStateException"
+				result="error" />
+			<exception-mapping exception="java.lang.IllegalThreadStateException"
+				result="error" />
+			<exception-mapping exception="java.lang.IndexOutOfBoundsException"
+				result="error" />
+			<exception-mapping exception="java.lang.NegativeArraySizeException"
+				result="error" />
+			<exception-mapping exception="java.lang.NullPointerException"
+				result="error" />
+			<exception-mapping exception="java.lang.NumberFormatException"
+				result="error" />
+			<exception-mapping exception="java.lang.SecurityException"
+				result="error" />
+			<exception-mapping exception="java.lang.StringIndexOutOfBounds"
+				result="error" />
+			<exception-mapping exception="java.lang.UnsupportedOperationException"
+				result="error" />
+			<exception-mapping exception="java.lang.ClassNotFoundException"
+				result="error" />
+			<exception-mapping exception="java.lang.CloneNotSupportedException"
+				result="error" />
+			<exception-mapping exception="java.lang.IllegalAccessException"
+				result="error" />
+			<exception-mapping exception="java.lang.InstantiationException"
+				result="error" />
+			<exception-mapping exception="java.lang.InterruptedException"
+				result="error" />
+			<exception-mapping exception="java.lang.NoSuchFieldException"
+				result="error" />
+			<exception-mapping exception="java.lang.NoSuchMethodException"
+				result="error" />
+		</global-exception-mappings>
 
 		<action name="list" class="editMuseeAction" method="listMusees">
 			<result>/view/listMusees.jsp</result>
