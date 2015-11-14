@@ -22,8 +22,8 @@
 	rel="stylesheet">
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script src='<s:url value="/assets/js/ie-emulation-modes-warning.js"/>'></script>
+<!--[if lt IE 9]><script src="../../ressources/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src='<s:url value="/ressources/js/ie-emulation-modes-warning.js"/>'></script>
 
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -73,7 +73,8 @@
 						<a class="btn btn-alert btn-danger" href="${linkEditMusees }"
 							role="button"><span class="glyphicon glyphicon-wrench"></span>Administration</a>
 						<a class="btn btn-alert btn-danger" href="${linkDeconnexion }"
-							role="button"><span class="glyphicon glyphicon-log-out"></span>Se déconnecter</a>
+							role="button"><span class="glyphicon glyphicon-log-out"></span>Se
+							déconnecter</a>
 					</div>
 				</s:else>
 			</div>
@@ -131,5 +132,7 @@
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script
 		src='<s:url value="/ressources/js/ie10-viewport-bug-workaround.js"/>'></script>
+	
+
 </body>
 </html>

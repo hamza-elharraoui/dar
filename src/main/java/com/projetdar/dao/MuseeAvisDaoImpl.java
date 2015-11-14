@@ -9,8 +9,8 @@ import com.projetdar.entity.Avis;
 import com.projetdar.entity.Musee;
 
 /**
- * MuseeAvisDAOImpl est la classe qui implémente l'interface MuseeAvisDAO, et
- * permets d'intéragir avec une base de données relationnels en utilisant le
+ * MuseeAvisDAOImpl est la classe qui implemente l'interface MuseeAvisDAO, et
+ * permets d'interagir avec une base de donnees relationnels en utilisant le
  * framework Hibernate
  * 
  *
@@ -18,7 +18,7 @@ import com.projetdar.entity.Musee;
 @Repository
 public class MuseeAvisDaoImpl implements MuseeAvisDAO {
 	/**
-	 * La variable sessionFactory est injecté par Spring
+	 * La variable sessionFactory est injecte par Spring
 	 */
 	private SessionFactory sessionFactory;
 
@@ -26,7 +26,7 @@ public class MuseeAvisDaoImpl implements MuseeAvisDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	// code des différentes méthodes implémentés, en utilisant le framework
+	// code des differentes methodes implementes, en utilisant le framework
 	// Hibernate
 	@Override
 	public void addAvis(Avis avis, Long idMusee) {

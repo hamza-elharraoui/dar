@@ -2,7 +2,7 @@ package com.projetdar.controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.projetdar.service.MuseeAvisManager;
-
+// C'est la classe responsable de recuperer une image  
 public class ImageAction extends ActionSupport {
 
 	/**
@@ -13,7 +13,6 @@ public class ImageAction extends ActionSupport {
 	private Long idMusee;
 
 	private MuseeAvisManager museeAvisManager;
-
 
 	public String execute() {
 		return SUCCESS;
@@ -27,10 +26,6 @@ public class ImageAction extends ActionSupport {
 
 	public String getCustomContentType() {
 		return museeAvisManager.getMuseeById(idMusee).getTypeImage();
-	}
-
-	public String getCustomContentDisposition() {
-		return "anyname.jpg";
 	}
 
 	public MuseeAvisManager getMuseeAvisManager() {

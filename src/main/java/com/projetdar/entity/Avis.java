@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Cette classe représente un avis concernant un des musée de Paris
+ * Cette classe represente un avis concernant un des musee de Paris
  * 
  *
  */

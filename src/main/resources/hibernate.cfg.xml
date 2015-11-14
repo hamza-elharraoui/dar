@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC
     "-//Hibernate/Hibernate Configuration DTD//EN"
     "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
+<!-- fichier de mapping Hibernate du modele de l'application -->
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.show_sql">true</property>

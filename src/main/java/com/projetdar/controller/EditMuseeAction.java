@@ -36,6 +36,10 @@ public class EditMuseeAction extends ActionSupport implements Preparable {
 	private String museeImageContentType;
 	private String museeImageFileName;
 
+	// Cette methode s'execute avant la creation l'instantiation de
+	// EditMuseeAction et l'invocation de chaque action, et permet
+	// d'initialiser les objets envoyee depuis l'interface web avec la valeur
+	// null afin d'eviter l'exception NullPointerException
 	@Override
 	public void prepare() throws Exception {
 		musee = null;
@@ -45,17 +49,19 @@ public class EditMuseeAction extends ActionSupport implements Preparable {
 		museeImage = null;
 	}
 
-	// M�thodes des actions
+	// Action pour recuperer la liste des musees
 
 	public String listMusees() {
 		listeMusees = museeAvisManager.getAllMusees();
 		return SUCCESS;
 	}
 
+	// Action pour se redireger ves le formulaire d'ajout d'un musee
 	public String addMusee() {
 		return SUCCESS;
 	}
 
+	// Action pour sauvegarder un musee dans la base de donnees
 	public String saveAddMusee() {
 
 		byte[] tabImage = null;
@@ -75,11 +81,13 @@ public class EditMuseeAction extends ActionSupport implements Preparable {
 		return SUCCESS;
 	}
 
+	// Action pour se redireger vers l'interface de mise a jour d'un musee
 	public String updateMusee() {
 		musee = museeAvisManager.getMuseeById(idMusee);
 		return SUCCESS;
 	}
 
+	// Action pour sauvegarder la mise a jour
 	public String saveUpdateMusee() {
 		Musee m = museeAvisManager.getMuseeById(musee.getIdMusee());
 		musee.setNomImage(museeImageFileName);
@@ -107,11 +115,13 @@ public class EditMuseeAction extends ActionSupport implements Preparable {
 		return SUCCESS;
 	}
 
+	// Action pour supprimer un musee
 	public String deleteMusee() {
 		museeAvisManager.deleteMusee(idMusee);
 		return SUCCESS;
 	}
 
+	// Action pour afficher un musee
 	public String showMusee() {
 		musee = museeAvisManager.getMuseeById(idMusee);
 		listeMusees = museeAvisManager.getAllMusees();
@@ -119,11 +129,15 @@ public class EditMuseeAction extends ActionSupport implements Preparable {
 		return SUCCESS;
 	}
 
+	// Action pour poster un avis
 	public String postAvis() {
 		museeAvisManager.addAvis(avis, idMusee);
+		musee=museeAvisManager.getMuseeById(idMusee);
+		avis=null;
 		return SUCCESS;
 	}
 
+	// Action pour supprimer un avis
 	public String deleteAvis() {
 
 		// Dans ce code on parcours la liste des avis appartenant à un musee et
@@ -141,9 +155,11 @@ public class EditMuseeAction extends ActionSupport implements Preparable {
 		}
 		m.setAvis(listeA);
 		museeAvisManager.updateMusee(m);
+		musee=m;
 		return SUCCESS;
 	}
 
+	// Action pour obtenir l'interface de l'administration de l'application
 	public String editMusees() {
 		Map<String, Object> sessionAttributes = ActionContext.getContext()
 				.getSession();
@@ -154,7 +170,8 @@ public class EditMuseeAction extends ActionSupport implements Preparable {
 		return SUCCESS;
 	}
 
-	// Getters and Setters
+	// Getters and Setters pour les differents objets echangees entre l'action
+	// et l'interface utilisateur
 
 	public void setListeMusees(List<Musee> listeMusees) {
 		this.listeMusees = listeMusees;

@@ -13,14 +13,19 @@ public class AuhtenticationInterceptor implements Interceptor {
 
 	@Override
 	public void destroy() {
-		// Destruction des ressources crées après l'exécution de l'interceptor
+		// Destruction des ressources crees après l'execution de l'interceptor
 	}
 
 	@Override
 	public void init() {
-		// Création des ressources avant l'exécution de l'interceptor
+		// Creation des ressources avant l'exécution de l'interceptor
 	}
 
+	// C'est la methode qui s'excute quand on a une action qui necessite
+	// l'authentification
+	// elle permet de recuperer la session courante, verifier est ce que
+	// l'utilisateur est bien authentifie, et apres invoque l'intercepteur
+	// suivant dans le stack des intercepteurs
 	@Override
 	public String intercept(ActionInvocation actionInvocation) throws Exception {
 		System.out.println("A l'intérieur de l'intercepteur");
@@ -29,11 +34,12 @@ public class AuhtenticationInterceptor implements Interceptor {
 
 		Admin admin = (Admin) sessionAttributes.get("admin");
 
-		if (admin == null) {
-			return Action.LOGIN;
+		if (sessionAttributes == null || admin == null) {
+			return Action.INPUT;
 		} else {
 			Action action = (Action) actionInvocation.getAction();
 			if (action instanceof AdminAware) {
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
 				((AdminAware) action).setAdmin(admin);
 			}
 			return actionInvocation.invoke();

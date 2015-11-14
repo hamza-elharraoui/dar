@@ -13,8 +13,7 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<!-- This bean has been referred fron struts.xml file; So type it correctly; -->
-	<!-- Make scope prototype; This is really important. -->
+	<!-- les differents classes d'actions de l'application -->
 
 	<bean name="editMuseeAction" class="com.projetdar.controller.EditMuseeAction"
 		scope="prototype">
@@ -22,7 +21,7 @@
 			<ref bean="museeAvisManager" />
 		</property>
 		<property name="adminManager">
-			<ref bean="adminManager"/>
+			<ref bean="adminManager" />
 		</property>
 	</bean>
 	<bean name="imageAction" class="com.projetdar.controller.ImageAction"
@@ -39,8 +38,8 @@
 
 
 
-	<!-- These beans are injected automatically by spring context -->
-	<!-- L'injection des dépendances entre les différentes couches de l'application -->
+	<!-- L'injection des dépendances entre les différentes couches de l'application 
+		par Spring Context -->
 	<bean id="museeAvisDAO" class="com.projetdar.dao.MuseeAvisDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -55,7 +54,7 @@
 		<property name="adminDAO" ref="adminDAO" />
 	</bean>
 
-	<!-- Configure jdbc.properties -->
+	<!--  jdbc.properties -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 		p:location="classpath:jdbc.properties" />
@@ -65,7 +64,7 @@
 		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
 		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
 
-	<!-- Configure hibernate session factory -->
+	<!-- Configuration de Session Factory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

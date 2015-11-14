@@ -27,7 +27,7 @@
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script src='<s:url value="/assets/js/ie-emulation-modes-warning.js"/>'></script>
+<script src='<s:url value="/ressources/js/ie-emulation-modes-warning.js"/>'></script>
 
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,22 +35,6 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<script type="text/javascript">
-	$(function() {
-		$("#dialog").dialog({
-			modal : true,
-			buttons : {
-				"Oui" : function() {
-					$('body').css('background', 'yellow');
-					$(this).dialog("close");
-				},
-				"Non" : function() {
-					$(this).dialog("close");
-				}
-			}
-		});
-	});
-</script>
 </head>
 
 <body>
@@ -92,7 +76,8 @@
 						<a class="btn btn-alert btn-danger" href="${linkEditMusees }"
 							role="button"><span class="glyphicon glyphicon-wrench"></span>Administration</a>
 						<a class="btn btn-alert btn-danger" href="${linkDeconnexion }"
-							role="button"><span class="glyphicon glyphicon-log-out"></span>Se déconnecter</a>
+							role="button"><span class="glyphicon glyphicon-log-out"></span>Se
+							déconnecter</a>
 					</div>
 				</s:else>
 			</div>
@@ -153,16 +138,14 @@
 									</s:if>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="tabAvis">
 								<c:forEach items="${musee.avis}" var="avis">
 									<tr>
 										<td><h4 class="list-group-item-heading">${avis.nom }</h4></td>
 										<td><p class="list-group-item-text">${avis.description}</p></td>
 										<s:if test="#session.admin !=null">
-											<td><s:url namespace="/" var="linkDelete"
-													action="delete">
-													<s:param name="idMusee">${musee.idMusee }</s:param>
-												</s:url> <a class="btn btn-danger btn-xs" href="${linkDelete}"><span
+											<td><a class="btn btn-danger btn-xs"
+												onclick="deleteAvis(${musee.idMusee},${avis.idAvis });"><span
 													class="glyphicon glyphicon-trash"></span>Supprimer</a></td>
 										</s:if>
 									</tr>
@@ -171,36 +154,37 @@
 						</table>
 
 					</div>
-					<div class="col-sm-6 col-md-6 main">
-						<h2 class="sub-header">Donner votre avis</h2>
+					<s:if test="#session.admin ==null">
+						<div class="col-sm-6 col-md-6 main">
+							<h2 class="sub-header">Donner votre avis</h2>
+							<div class="form-group">
+								<s:form id="formAvis" method="post" action="postAvis"
+									acceptcharset="UTF-8" cssClass="form-vertical well">
+									<fieldset>
+										<s:param name="idMusee">${musee.idMusee}</s:param>
+										<s:hidden name="idMusee" />
+										<div class="form-group">
+											<label for="nom">Votre nom complet :</label>
+											<s:textfield type="text" key="Votre nom complet"
+												cssClass="form-control" name="avis.nom" />
+										</div>
+										<div>
+											<label for="description">Donnez votre avis :</label>
+											<s:textarea cssClass="form-control"
+												key="Contenu de votre commentaire" name="avis.description" />
+										</div>
+										<div class="btn-group">
 
-						<div class="form-group">
-							<s:form method="post" action="postAvis" acceptcharset="UTF-8"
-								cssClass="form-vertical well">
-								<fieldset>
-									<s:param name="idMusee">${musee.idMusee}</s:param>
-									<s:hidden name="idMusee" />
-									<div class="form-group">
-										<label for="nom">Votre nom complet :</label>
-										<s:textfield type="text" key="Votre nom complet"
-											cssClass="form-control" name="avis.nom" />
-									</div>
-									<div>
-										<label for="description">Donnez votre avis :</label>
-										<s:textarea cssClass="form-control"
-											key="Contenu de votre commentaire" name="avis.description" />
-									</div>
-									<div class="btn-group">
+											<s:submit type="button"
+												cssClass="btn btn-default btn-success "
+												key="Soumettre votre avis" />
+										</div>
+									</fieldset>
+								</s:form>
+							</div>
 
-										<s:submit type="button"
-											cssClass="btn btn-default btn-success "
-											key="Soumettre votre avis" />
-									</div>
-								</fieldset>
-							</s:form>
 						</div>
-
-					</div>
+					</s:if>
 				</div>
 				<footer>
 					<p>&copy; EL HARRAOUI et T'FEIL 2015</p>
@@ -219,6 +203,37 @@
 	<script src='<s:url value="/ressources/js/bootstrap.min.js"/>'></script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script
-		src='<s:url value="/ressources/assets/ie10-viewport-bug-workaround.js"/>'></script>
+		src='<s:url value="/ressources/js/ie10-viewport-bug-workaround.js"/>'></script>
+
+	<script>
+			$('#formAvis').on('submit', function(e) {
+				// J'empêche le comportement par défaut du navigateur, c-à-d de soumettre le formulaire
+				e.preventDefault(); 
+				// L'objet jQuery du formulaire
+		        var $this = $(this); 
+		 
+		        // Je récupère les valeurs
+		        var nom = $('#formAvis_avis_nom').val();
+		        var description = $('#formAvis_avis_description').val();
+		 
+		        
+		        // verification 
+		        if(nom === '' || description === '') {
+		            alert('Les champs doivent êtres remplis');
+		        } else {
+		        	$.get('postAvis?idMusee='+${idMusee}+"&avis.nom="+nom+"&avis.description="+description,function(data) {
+						$('#tabAvis').html(data);
+		            });
+		        	// pour vider le formulaire de soumission d'avis
+		        	$(':input','#formAvis').val('');
+			}
+		    });
+		function deleteAvis(idM,idA) {
+			$.get('deleteAvis?idMusee='+idM+"&idAvis="+idA, function(data) {
+				$('#tabAvis').html(data);
+			});
+		}
+		
+	</script>
 </body>
 </html>

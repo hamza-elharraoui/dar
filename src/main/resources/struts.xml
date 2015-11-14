@@ -34,7 +34,7 @@
 		<!-- Two things to Notice: 1) class is set to 'editEmployeeAction' which 
 			is bean defined by Spring context 2) We have given the method to be called 
 			here as well; -->
-		<!-- ResultType pour récupérer afficher les photos chez le client -->
+		<!-- ResultType pour récupérer et afficher les photos chez le client -->
 		<result-types>
 			<result-type name="imageResult"
 				class="com.projetdar.controller.CustomImageBytesResult" />
@@ -54,10 +54,11 @@
 
 		<!-- <default-interceptor-ref name="authStack"></default-interceptor-ref> -->
 
-
+		<default-action-ref name="list" />
 		<global-results>
 			<result name="error">/view/error.jsp</result>
 		</global-results>
+
 		<global-exception-mappings>
 			<exception-mapping exception="java.lang.Exception"
 				result="error" />
@@ -112,7 +113,7 @@
 		</action>
 		<!-- les actions de la connextion et la déconnexion -->
 		<action name="login" class="loginAction">
-			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<!-- <interceptor-ref name="defaultStack"></interceptor-ref> -->
 			<result name="error">/view/listMusees.jsp</result>
 			<result name="success" type="redirect">/list</result>
 			<result name="input" type="redirect">/list</result>
@@ -177,12 +178,13 @@
 		<!-- Les actions pour les avis : ajouter et supprimer un avis ( la suppression 
 			est dédiée pour les admins, d'ou l'appel de l'intercepteur authStack) -->
 		<action name="postAvis" class="editMuseeAction" method="postAvis">
-			<result name="success" type="redirect">/list</result>
+			<result name="success">/view/tabAvis.jsp</result>
 		</action>
 		<action name="deleteAvis" class="editMuseeAction" method="deleteAvis">
 			<interceptor-ref name="authStack" />
-			<result name="login">/view/login.jsp</result>
-			<result type="redirect">/list</result>
+			<result name="success">/view/tabAvis.jsp</result>
+			<!-- <result type="redirect" >/list</result> -->
+
 		</action>
 	</package>
 

@@ -29,20 +29,23 @@ public class LoginAction extends ActionSupport implements SessionAware,
 			if (a.getPassword().equals(admin.getPassword())) {
 				sessionAttributes.put("admin", admin);
 				return SUCCESS;
+			} else {
+				addActionError("Erreur d'authentification : Mot de passe erroné");
+				admin = new Admin();
+				sessionAttributes.remove(admin);
+				return ERROR;
 			}
-			addActionError("Erreur d'authentification : Mot de passe ou Login erroné");
-			admin=null;
-			return ERROR;
 		}
-		addActionError("Erreur d'authentification : Mot de passe ou Login erroné");
-		admin=null;
+		addActionError("Erreur d'authentification : Login erroné");
+		admin = new Admin();
+		sessionAttributes.remove(admin);
 		return ERROR;
 
 	}
 
 	public String deleteSession() {
 		sessionAttributes = ActionContext.getContext().getSession();
-		sessionAttributes.clear();
+		sessionAttributes.remove("admin");
 		return SUCCESS;
 	}
 

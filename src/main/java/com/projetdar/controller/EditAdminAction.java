@@ -2,8 +2,6 @@ package com.projetdar.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 import com.projetdar.entity.Admin;

@@ -45,7 +45,8 @@ public class AppTest extends AbstractTransactionalJUnit4SpringContextTests {
 //		dao.updateMusee(m2);
 //		dao.deleteMusee(3L);
 //		assertTrue(dao.getAllMusees().size() == 2);
-		Admin a = dao.getAdminByLogin("hamza9");
-		assertTrue(a==null);
+		Admin a = dao.getAdminByLogin("hamza92");
+		System.out.println(a.getPassword());
+		assertTrue(a!=null);
 	}
 }

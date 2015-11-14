@@ -5,39 +5,41 @@ import java.util.List;
 import com.projetdar.entity.Avis;
 import com.projetdar.entity.Musee;
 
+
+
 /**
  * 
- * MuseeAvisDAO est l'interface qui regroupe les différentes méthodes de la
- * couche d'accées au données des avis et des musées
+ * MuseeAvisDAO est l'interface qui regroupe les differentes  methodes de la
+ * couche d'accees au donnees des avis et des musees
  *
  */
 public interface MuseeAvisDAO {
 	/**
-	 * Ajoute un avis d'un utilisateur vis-à-vis d'un musée
+	 * Ajoute un avis d'un utilisateur vis-e-vis d'un musee
 	 * 
 	 * @param avis
 	 *            l'objet avis
 	 * @param idMusee
-	 *            l'id du musée pour lesquel appartient l'avis
+	 *            l'id du musee pour lesquel appartient l'avis
 	 */
 	public void addAvis(Avis avis, Long idMusee);
 
 	/**
-	 * Récupère la liste des avis des visiteurs de l'application par rapport à
-	 * un musée donnée
+	 * Recuperer la liste des avis des visiteurs de l'application par rapport a
+	 * un musee donnee
 	 * 
 	 * @param idMusee
-	 *            L'id du musée
+	 *            L'id du musee
 	 * @return retourne liste des avis
 	 */
 	public List<Avis> getAllAvisForMusee(Long idMusee);
 
 	/**
-	 * Récupère un avis relatif à un musée en se basant sur son id
+	 * Recuperer un avis relatif a un musee en se basant sur son id
 	 * 
 	 * @param idAvis
 	 *            L'id de l'avis
-	 * @return retourne l'objet avis recherché
+	 * @return retourne l'objet avis recherche
 	 */
 	public Avis getAvisById(Long idAvis);
 
@@ -50,7 +52,7 @@ public interface MuseeAvisDAO {
 	public void deleteAvis(Long idAvis);
 
 	/**
-	 * Ajoute un musée
+	 * Ajoute un musee 
 	 * 
 	 * @param musee
 	 *            un objet de classe Musee
@@ -58,33 +60,33 @@ public interface MuseeAvisDAO {
 	public void addMusee(Musee musee);
 
 	/**
-	 * Retourne un musée existant en entrant son id
+	 * Retourne un musee existant en entrant son id
 	 * 
 	 * @param idMusee
-	 * @return objet musée
+	 * @return objet musee
 	 */
 	public Musee getMuseeById(Long idMusee);
 
 	/**
-	 * permet de modifier les informations d'un musée déjà existant
+	 * permet de modifier les informations d'un musee deja existant
 	 * 
 	 * @param musee
-	 *            instance de classe Musée
+	 *            instance de classe Musee
 	 */
 	public void updateMusee(Musee musee);
 
 	/**
-	 * Retourne tous les musées existants dans la base de données
+	 * Retourne tous les musees existants dans la base de donnees
 	 * 
-	 * @return liste des musées
+	 * @return liste des musees
 	 */
 	public List<Musee> getAllMusees();
 
 	/**
-	 * Supprime un musée de la base de données
+	 * Supprime un musee de la base de donnees
 	 * 
 	 * @param museeId
-	 *            l'id du musée à supprimer
+	 *            l'id du musee a supprimer
 	 */
 	public void deleteMusee(Long idMusee);
 }
