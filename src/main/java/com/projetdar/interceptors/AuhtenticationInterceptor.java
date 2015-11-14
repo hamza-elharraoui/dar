@@ -38,12 +38,16 @@ public class AuhtenticationInterceptor implements Interceptor {
 			return Action.INPUT;
 		} else {
 			Action action = (Action) actionInvocation.getAction();
-			if (action instanceof AdminAware) {
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
-				((AdminAware) action).setAdmin(admin);
+			if (!(admin.getLogin() == null && admin.getPassword() == null)) {
+				if (action instanceof AdminAware) {
+					System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
+					((AdminAware) action).setAdmin(admin);
+				}
+				return actionInvocation.invoke();
+			} else {
+				return Action.INPUT;
 			}
-			return actionInvocation.invoke();
+
 		}
 	}
-
 }
