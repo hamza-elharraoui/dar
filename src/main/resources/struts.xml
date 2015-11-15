@@ -6,7 +6,8 @@
 <struts>
 
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
-	<!-- devMode is helpful when you want some extra logs for debugging -->
+	<!-- le mode developpeur est active. Il sert a faciliter le debogage lors 
+		de l'execution -->
 	<constant name="struts.devMode" value="true" />
 
 
@@ -15,32 +16,32 @@
 	<constant name="struts.custom.i18n.resources" value="messages" />
 
 
-	<!-- This is important if you are planning to have slashes in Action URLs 
-		e.g. In this demo, employee is deleted using URL /delete/10 This this is 
-		set to false; then struts will try to find mapping for URL "/10" instaed 
-		of "/delete/10" -->
+	<!-- Pour introduire des / dans les url des actions Struts -->
 	<constant name="struts.enable.SlashesInActionNames" value="true" />
 
 
-	<!-- set the bootstrap theme as the default one -->
+	<!-- pour que les tags struts genere un code tres simple sans aucune template -->
 	<constant name="struts.ui.theme" value="simple" />
 
 
-	<!-- Normal Action mappings are defined here -->
+	<!-- le package qui regroupe les differentes actions de l'application -->
 	<package name="musee" namespace="/" extends="struts-default">
 
 
 
-		<!-- Two things to Notice: 1) class is set to 'editEmployeeAction' which 
-			is bean defined by Spring context 2) We have given the method to be called 
-			here as well; -->
+
 		<!-- ResultType pour récupérer et afficher les photos chez le client -->
 		<result-types>
 			<result-type name="imageResult"
 				class="com.projetdar.controller.CustomImageBytesResult" />
 		</result-types>
-
+		<!-- la declaration des differents intercepteur que nous utiliserons dans 
+			notre application -->
 		<interceptors>
+			<!-- L'interceteur authentification permet de verifier est-ce que l'utilisateur 
+				possede la session qu'elle lui permet d'acceder a une ressource. Il est invoque 
+				avant chaque acces vers une des fonctionnalites de l'admin ( necessitant 
+				une authentification -->
 			<interceptor name="authentication"
 				class="com.projetdar.interceptors.AuhtenticationInterceptor"></interceptor>
 			<interceptor-stack name="authStack">
@@ -52,8 +53,7 @@
 			</interceptor-stack>
 		</interceptors>
 
-		<!-- <default-interceptor-ref name="authStack"></default-interceptor-ref> -->
-
+		<!-- -->
 		<default-action-ref name="list" />
 		<global-results>
 			<result name="error">/view/error.jsp</result>

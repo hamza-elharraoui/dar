@@ -8,13 +8,19 @@
 	<welcome-file-list>
 		<welcome-file>/WEB-INF/index.jsp</welcome-file>
 	</welcome-file-list>
+	<!-- C'est le context d'une application Spring, le fichier beans.xml contient 
+		la defenition des beans de l'application -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:beans.xml</param-value>
 	</context-param>
+	<!-- Le listner qui s'en charge du lancement ou de l'arret de WebApplicationContext -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<!-- C'est le filtre par default de Struts. Chaque requete passe par ce 
+		filtre. Il joue le role du controlleur Generale de l'application. En fonction 
+		de la requete de l'utilisateur, ce filtre permet de declencher l'action approprie -->
 	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -31,22 +37,5 @@
 		<filter-name>struts2</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-<!-- 	<jsp-config> -->
-<!-- 		<taglib> -->
-<!-- 			<taglib-uri>/tags/struts-bean</taglib-uri> -->
-<!-- 			<taglib-location>/WEB-INF/struts-bean.tld</taglib-location> -->
-<!-- 		</taglib> -->
-<!-- 		<taglib> -->
-<!-- 			<taglib-uri>/tags/struts-html</taglib-uri> -->
-<!-- 			<taglib-location>/WEB-INF/struts-html.tld</taglib-location> -->
-<!-- 		</taglib> -->
-<!-- 		<taglib> -->
-<!-- 			<taglib-uri>/tags/struts-logic</taglib-uri> -->
-<!-- 			<taglib-location>/WEB-INF/struts-logic.tld</taglib-location> -->
-<!-- 		</taglib> -->
-<!-- 		<taglib> -->
-<!-- 			<taglib-uri>/tags/struts-nested</taglib-uri> -->
-<!-- 			<taglib-location>/WEB-INF/struts-nested.tld</taglib-location> -->
-<!-- 		</taglib> -->
-<!-- 	</jsp-config> -->
+
 </web-app>
